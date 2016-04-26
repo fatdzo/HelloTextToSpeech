@@ -6,3 +6,5 @@ Description: Interested in adding TextToSpeech functionality to your apps? Join 
 
 Sparker: Marko Markovic 
 Mark is a recent resident of Orlando. He is a web and mobile software developer with an interest in algorithmic music composition. His text-to-speech news aggregator Android App "Anchorman Free" is available in the app store.
+
+Thanks to our sponsor, Courtney Dunn with Lowndes, Drosdick, Doster, Kantor & Reed, P.A. They are awesome and provide food and drinks for the event!
