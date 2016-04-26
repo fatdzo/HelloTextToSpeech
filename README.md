@@ -1,5 +1,5 @@
 HelloTextToSpeech
-This is one of the presentations held at the Aprils Orlando Devs meetup. Here you will find the codebase to get you started on your app using text-to-speech. Feel free to fork this codebase and make changes to it.
+This is one of the presentations held at the Aprils Orlando Devs meetup. Here you will find the codebase to get you started on your app using text-to-speech. Feel free to fork this codebase and make changes to it, also any suggestions you have are more than welcome.
 
 Topic: "Hello TextToSpeech" 
 Description: Interested in adding TextToSpeech functionality to your apps? Join us where we will cover the code base and everything you need to know to get you started.
