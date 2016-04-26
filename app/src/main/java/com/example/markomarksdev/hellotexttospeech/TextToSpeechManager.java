@@ -16,62 +16,14 @@ import java.util.Locale;
 public class TextToSpeechManager implements TextToSpeech.OnInitListener {
     private TextToSpeech myTTS;
     private Context ctx;
-    private static  int MY_TTS_CHECK_CODE = 0;
+    private TextToSpeechUtteranceListener textToSpeechUtteranceListener;
+    public static int MY_TTS_CHECK_CODE = 0;
 
     public TextToSpeechManager(Context context)
     {
         ctx = context;
+        textToSpeechUtteranceListener = new TextToSpeechUtteranceListener(ctx);
     }
-
-    public void speak(String text)
-    {
-        String utteranceId=this.hashCode() + "";
-        /*
-        QUEUE_ADD - Queue mode where the new entry is added at the end of the playback queue.
-        QUEUE_FLUSH - Queue mode where all entries in the playback queue (media to be played and text to be synthesized) are dropped and replaced by the new entry.
-        */
-
-        /*
-        *   text	CharSequence: The string of text to be spoken. No longer than getMaxSpeechInputLength() characters.
-            queueMode	int: The queuing strategy to use, QUEUE_ADD or QUEUE_FLUSH.
-            params	Bundle: Parameters for the request. Can be null. Supported parameter names: KEY_PARAM_STREAM, KEY_PARAM_VOLUME, KEY_PARAM_PAN. Engine specific parameters may be passed in but the parameter keys must be prefixed by the name of the engine they are intended for. For example the keys "com.svox.pico_foo" and "com.svox.pico:bar" will be passed to the engine named "com.svox.pico" if it is being used.
-            utteranceId	String: An unique identifier for this request.
-        * */
-
-        myTTS.speak(text, TextToSpeech.QUEUE_ADD, null, utteranceId);
-    }
-
-    public void speakAll(ArrayList<String> list)
-    {
-        for(String txt: list)
-        {
-            speak(txt);
-        }
-    }
-
-    public void stopReading()
-    {
-        myTTS.stop();
-    }
-
-    public void onDestroy()
-    {
-        if(myTTS != null)
-        {
-            myTTS.stop();
-            myTTS.shutdown();
-        }
-    }
-
-    public void initializeTTS()
-    {
-        if(myTTS == null)
-        {
-            myTTS = new TextToSpeech(ctx, this);
-            myTTS.setSpeechRate(1.0f);
-        }
-    }
-
 
     @Override
     public void onInit(int initStatus) {
@@ -104,4 +56,57 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
             Toast.makeText(ctx, "Text To Speech init failed...", Toast.LENGTH_LONG).show();
         }
     }
+
+    public void onDestroy()
+    {
+        if(myTTS != null)
+        {
+            myTTS.stop();
+            myTTS.shutdown();
+        }
+    }
+
+    public void initializeTTS()
+    {
+        if(myTTS == null)
+        {
+            myTTS = new TextToSpeech(ctx, this);
+            myTTS.setSpeechRate(1.0f);
+            myTTS.setPitch(1.0f);
+            myTTS.setOnUtteranceProgressListener(textToSpeechUtteranceListener);
+        }
+    }
+
+    public void speak(String text)
+    {
+        /*
+        QUEUE_ADD - Queue mode where the new entry is added at the end of the playback queue.
+        QUEUE_FLUSH - Queue mode where all entries in the playback queue (media to be played and text to be synthesized) are dropped and replaced by the new entry.
+        */
+
+        /*
+        *   text	CharSequence: The string of text to be spoken. No longer than getMaxSpeechInputLength() characters.
+            queueMode	int: The queuing strategy to use, QUEUE_ADD or QUEUE_FLUSH.
+            params	Bundle: Parameters for the request. Can be null. Supported parameter names: KEY_PARAM_STREAM, KEY_PARAM_VOLUME, KEY_PARAM_PAN. Engine specific parameters may be passed in but the parameter keys must be prefixed by the name of the engine they are intended for. For example the keys "com.svox.pico_foo" and "com.svox.pico:bar" will be passed to the engine named "com.svox.pico" if it is being used.
+            utteranceId	String: An unique identifier for this request.
+        * */
+
+        String utteranceId=this.hashCode() + "";
+        myTTS.speak(text, TextToSpeech.QUEUE_ADD, null, utteranceId);
+    }
+
+    public void speakAll(ArrayList<String> list)
+    {
+        for(String txt: list)
+        {
+            speak(txt);
+        }
+    }
+
+    public void stopReading()
+    {
+        myTTS.stop();
+    }
+
+
 }
