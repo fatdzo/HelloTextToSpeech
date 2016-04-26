@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         ttsManager = new TextToSpeechManager(this);
         ttsManager.initializeTTS();
 
-        final ArrayList<String> toSpeak = getStringArrayList();
+        //final ArrayList<String> toSpeak = getStringArrayList();
 
         Button read = (Button)findViewById(R.id.button);
         if(read!=null)
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     ttsManager.speak(editText.getText().toString(), utteranceId);
-                    ttsManager.speakAll(toSpeak, utteranceId);
+                    //ttsManager.speakAll(toSpeak, utteranceId);
                 }
             });
         }
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             stop.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ttsManager.stopReading();
+                    ttsManager.stopSpeaking();
                 }
             });
         }

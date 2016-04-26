@@ -14,8 +14,8 @@ import java.util.Locale;
  */
 //TextToSpeech.OnInitListener - Interface definition of a callback to be invoked indicating the completion of the TextToSpeech engine initialization.
 public class TextToSpeechManager implements TextToSpeech.OnInitListener {
-    private TextToSpeech myTTS;
     private Context ctx;
+    private TextToSpeech myTTS;
     private TextToSpeechUtteranceListener textToSpeechUtteranceListener;
     public static int MY_TTS_CHECK_CODE = 0;
 
@@ -79,19 +79,12 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
         }
     }
 
-    public void speak(String text, String utteranceId)
-    {
-        /*
+    /*
         QUEUE_ADD - Queue mode where the new entry is added at the end of the playback queue.
         QUEUE_FLUSH - Queue mode where all entries in the playback queue (media to be played and text to be synthesized) are dropped and replaced by the new entry.
-        */
-
-        /*
-        *   text	CharSequence: The string of text to be spoken. No longer than getMaxSpeechInputLength() characters.
-            queueMode	int: The queuing strategy to use, QUEUE_ADD or QUEUE_FLUSH.
-            params	Bundle: Parameters for the request. Can be null. Supported parameter names: KEY_PARAM_STREAM, KEY_PARAM_VOLUME, KEY_PARAM_PAN. Engine specific parameters may be passed in but the parameter keys must be prefixed by the name of the engine they are intended for. For example the keys "com.svox.pico_foo" and "com.svox.pico:bar" will be passed to the engine named "com.svox.pico" if it is being used.
-            utteranceId	String: An unique identifier for this request.
-        * */
+    */
+    public void speak(String text, String utteranceId)
+    {
         myTTS.speak(text, TextToSpeech.QUEUE_ADD, null, utteranceId);
     }
 
@@ -104,7 +97,7 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
         }
     }
 
-    public void stopReading()
+    public void stopSpeaking()
     {
         myTTS.stop();
     }
