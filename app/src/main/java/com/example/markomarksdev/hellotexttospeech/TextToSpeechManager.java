@@ -31,7 +31,9 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
         initializeTTS();
 
         if (initStatus == TextToSpeech.SUCCESS) {
+
             Locale currentLocale = ctx.getResources().getConfiguration().locale;
+
             if(myTTS.isLanguageAvailable(Locale.US)==TextToSpeech.LANG_AVAILABLE && currentLocale == Locale.US)
             {
                 myTTS.setLanguage(Locale.US);
@@ -57,15 +59,6 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
         }
     }
 
-    public void onDestroy()
-    {
-        if(myTTS != null)
-        {
-            myTTS.stop();
-            myTTS.shutdown();
-        }
-    }
-
     public void initializeTTS()
     {
         if(myTTS == null)
@@ -77,7 +70,16 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
         }
     }
 
-    public void speak(String text)
+    public void onDestroy()
+    {
+        if(myTTS != null)
+        {
+            myTTS.stop();
+            myTTS.shutdown();
+        }
+    }
+
+    public void speak(String text, String utteranceId)
     {
         /*
         QUEUE_ADD - Queue mode where the new entry is added at the end of the playback queue.
@@ -90,16 +92,15 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
             params	Bundle: Parameters for the request. Can be null. Supported parameter names: KEY_PARAM_STREAM, KEY_PARAM_VOLUME, KEY_PARAM_PAN. Engine specific parameters may be passed in but the parameter keys must be prefixed by the name of the engine they are intended for. For example the keys "com.svox.pico_foo" and "com.svox.pico:bar" will be passed to the engine named "com.svox.pico" if it is being used.
             utteranceId	String: An unique identifier for this request.
         * */
-
-        String utteranceId=this.hashCode() + "";
         myTTS.speak(text, TextToSpeech.QUEUE_ADD, null, utteranceId);
     }
 
-    public void speakAll(ArrayList<String> list)
+    public void speakAll(ArrayList<String> list, String utteranceId)
     {
         for(String txt: list)
         {
-            speak(txt);
+            String temputt = utteranceId + "_" + list.indexOf(txt);
+            speak(txt, temputt);
         }
     }
 

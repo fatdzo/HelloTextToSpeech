@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextToSpeechManager ttsManager;
     EditText editText;
-
+    String utteranceId=this.hashCode() + "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
             read.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ttsManager.speak(editText.getText().toString());
-                    ttsManager.speakAll(toSpeak);
+                    ttsManager.speak(editText.getText().toString(), utteranceId);
+                    ttsManager.speakAll(toSpeak, utteranceId);
                 }
             });
         }
