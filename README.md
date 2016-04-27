@@ -10,3 +10,5 @@ Mark is a recent resident of Orlando. He is a web and mobile software developer 
 Thanks to our sponsor, Courtney Dunn with Lowndes, Drosdick, Doster, Kantor & Reed, P.A. They are awesome and provide food and drinks for the event!
 
 http://www.meetup.com/Central-Florida-Android-Developers-Group/events/230405382/
+
+Slides from the presentation: https://docs.google.com/presentation/d/14yssWrEGZeVu6jFQ1Uw4nYgf96fvEuuQeocF96Ziw_0/edit?usp=sharing
