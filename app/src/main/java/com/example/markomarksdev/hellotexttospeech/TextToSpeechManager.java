@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,10 +30,11 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
     public void onInit(int initStatus) {
 
         initializeTTS();
-
+        Log.e("HelloTextToSpeech", "Init TTS");
         if (initStatus == TextToSpeech.SUCCESS) {
 
             Locale currentLocale = ctx.getResources().getConfiguration().locale;
+            Log.e("HelloTextToSpeech", "Voice name: " + myTTS.getDefaultVoice().getName());
 
             if(myTTS.isLanguageAvailable(Locale.US)==TextToSpeech.LANG_AVAILABLE && currentLocale == Locale.US)
             {
