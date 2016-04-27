@@ -25,12 +25,12 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
         ctx = context;
         textToSpeechUtteranceListener = new TextToSpeechUtteranceListener(ctx);
     }
-
     @Override
-    public void onInit(int initStatus) {
+    public void onInit(int initStatus)
+    {
+        Log.e("HelloTextToSpeech", "Init TTS");
 
         initializeTTS();
-        Log.e("HelloTextToSpeech", "Init TTS");
         if (initStatus == TextToSpeech.SUCCESS) {
 
             Locale currentLocale = ctx.getResources().getConfiguration().locale;
@@ -60,7 +60,6 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
             Toast.makeText(ctx, "Text To Speech init failed...", Toast.LENGTH_LONG).show();
         }
     }
-
     public void initializeTTS()
     {
         if(myTTS == null)
@@ -71,7 +70,6 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
             myTTS.setOnUtteranceProgressListener(textToSpeechUtteranceListener);
         }
     }
-
     public void onDestroy()
     {
         if(myTTS != null)
